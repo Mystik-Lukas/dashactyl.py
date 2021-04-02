@@ -9,7 +9,10 @@ class DashactylClient:
         self.auth = dashactyl_auth
 
     def get_user(self, userid:int):
-        data=requests.get(f"{self.url}/api/userinfo/?id={userid}", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" })
+        try:
+            data=requests.get(f"{self.url}/api/userinfo/?id={userid}", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" })
+        except:
+            return print("Your dashactyl_url or dashactyl_auth is invalid")
         data=data.json()
         if data['status'] == 'success':
             return DashactylUser(data)
@@ -18,7 +21,10 @@ class DashactylClient:
         return error
 
     def increment_coins(self, userid:int, amount:int):
-        data=requests.get(f"{self.url}/api/userinfo/?id={userid}", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" })
+        try:
+            data=requests.get(f"{self.url}/api/userinfo/?id={userid}", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" })
+        except:
+            return print("Your dashactyl_url or dashactyl_auth is invalid")
         data=data.json()
         if data['status'] == 'success':
             user=DashactylUser(data)
@@ -29,7 +35,10 @@ class DashactylClient:
             error.show()
             return error
         data = json.dumps({"id": str(userid), "coins": user.coins+amount})
-        data=requests.post("https://dashboard.solarhost.club/api/setcoins", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" }, data=data)
+        try:
+            data=requests.post("https://dashboard.solarhost.club/api/setcoins", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" }, data=data)
+        except:
+            return print("Your dashactyl_url or dashactyl_auth is invalid")
         data=data.json()
         if data['status'] != 'success': 
             error=IncrementCoinsError(data['status'])
@@ -40,7 +49,10 @@ class DashactylClient:
 
     def set_package(self, userid:int, package:str):
         data = json.dumps({"id": str(userid), "package": package})
-        data=requests.post("https://dashboard.solarhost.club/api/setplan", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" }, data=data)
+        try:
+            data=requests.post("https://dashboard.solarhost.club/api/setplan", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" }, data=data)
+        except:
+            return print("Your dashactyl_url or dashactyl_auth is invalid")
         data=data.json()
         if data['status'] != "success": 
             error=SetPackageError(data['status'], self.url)
@@ -51,7 +63,10 @@ class DashactylClient:
 
     def reset_package(self, userid:int):
         data = json.dumps({"id": str(userid)})
-        data=requests.post("https://dashboard.solarhost.club/api/setplan", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" }, data=data)
+        try:
+            data=requests.post("https://dashboard.solarhost.club/api/setplan", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" }, data=data)
+        except:
+            return print("Your dashactyl_url or dashactyl_auth is invalid")
         data=data.json()
         if data['status'] != "success": 
             error=ResetPackageError(data['status'])
@@ -62,7 +77,10 @@ class DashactylClient:
 
     def set_resources(self, userid:int, ram:int=None, disk:int=None, cpu:int=None, servers:int=None):
         data = json.dumps({"id": str(userid), "ram": ram, "disk": disk, "cpu": cpu, "servers": servers})
-        data=requests.post("https://dashboard.solarhost.club/api/setresources", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" }, data=data)
+        try:
+            data=requests.post("https://dashboard.solarhost.club/api/setresources", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" }, data=data)
+        except:
+            return print("Your dashactyl_url or dashactyl_auth is invalid")
         data=data.json()
         if data['status'] != "success": 
             error=SetResourcesError(data['status'])

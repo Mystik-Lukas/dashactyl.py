@@ -1,4 +1,3 @@
-from .error import GetUserError, IncrementCoinsError, SetPackageError, ResetPackageError, SetResourcesError
-from .dashboard.user import *
+from .client import *
 import json
 import requests
