@@ -1,4 +1,4 @@
-from .error import GetUserError, IncrementCoinsError, SetPackageError, ResetPackageError, SetResourcesError
+from .error import GetUserError, IncrementCoinsError, SetPackageError, ResetPackageError, SetResourcesError, SetCoinsError
 from .user import *
 import json
 import requests
@@ -42,6 +42,20 @@ class DashactylClient:
         data=data.json()
         if data['status'] != 'success': 
             error=IncrementCoinsError(data['status'])
+            error.show()
+            return error
+        else:
+            return True
+
+    def set_coins(self, userid:int, amount:int):
+        data = json.dumps({"id": str(userid), "coins": amount})
+        try:
+            data=requests.post("https://dashboard.solarhost.club/api/setcoins", headers={ "Content-Type": "application/json", "Authorization": f"Bearer {self.auth}" }, data=data)
+        except:
+            return print("Your dashactyl_url or dashactyl_auth is invalid")
+        data=data.json()
+        if data['status'] != 'success': 
+            error=SetCoinsError(data['status'])
             error.show()
             return error
         else:

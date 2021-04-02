@@ -10,7 +10,7 @@ classifiers = [
 
 setup(
     name='dashactyl.py',
-    version='0.0.7',
+    version='0.0.8',
     long_description=open('README.txt').read() + '\n\n' + open('CHANGELOG.txt').read(),
     url='https://github.com/Mystik-Lukas/dashactyl.py',  
     author='Lukas Canter',

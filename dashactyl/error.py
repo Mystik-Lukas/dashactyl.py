@@ -13,6 +13,21 @@ class IncrementCoinsError:
     def show(self):
         print(self.get())
 
+class SetCoinsError:
+    def __init__(self, data):
+        self.status=data['status']
+    
+    def get(self):
+        if self.status == 'invalid id':
+            return "The ID passed in \"increment_coins\" was invalid: An account does not exist with that ID"
+        elif self.status == 'too small or big coins':
+            return "The amount of coins you passed is either too large or too small: The number must be from 0-999999999999999"
+        else:
+            return "An unknown error occured"
+        
+    def show(self):
+        print(self.get())
+
 class GetUserError:
     def __init__(self, data):
         self.status=data['status']
