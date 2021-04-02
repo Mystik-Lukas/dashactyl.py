@@ -1,0 +1,25 @@
+Metadata-Version: 1.1
+Name: dashactyl.py
+Version: 0.0.5
+Summary: UNKNOWN
+Home-page: https://github.com/Mystik-Lukas/dashactyl.py
+Author: Lukas Canter
+Author-email: lukascanter07@outlook.com
+License: MIT
+Description: You can find all docs at https://mystik-lukas.github.io/dashactyl.py/
+        
+        Change Log
+        ==========
+        
+        0.0.1 (2/19/2021)
+        -----------------
+        - Release of package
+        
+        
+Keywords: dahsactyl
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: Microsoft :: Windows :: Windows 10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
